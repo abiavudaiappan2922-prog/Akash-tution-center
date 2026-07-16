@@ -1,9 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Sidebar from "@/components/admin/Sidebar";
-import Topbar from "@/components/admin/Topbar";
-import DashboardCards from "@/components/admin/DashboardCards";
+
 import {
   ResponsiveContainer,
   BarChart,
