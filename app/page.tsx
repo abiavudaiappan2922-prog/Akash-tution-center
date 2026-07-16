@@ -6,7 +6,7 @@ import Fees from "../components/Fees";
 import Admission from "../components/Admission";
 import Contact from "../components/Contact";
 import Footer from "../components/Footer";
-import Whatsapp from "../components/WhatsApp";
+
 
 export default function Home() {
 
@@ -48,7 +48,6 @@ export default function Home() {
 
       <Footer />
 
-      <Whatsapp />
 
     </main>
 
