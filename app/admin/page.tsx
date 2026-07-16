@@ -35,7 +35,10 @@ useEffect(() => {
   const [selectedClass, setSelectedClass] = useState("");
 
  const logout = () => {
-  Cookies.remove("admin");
+  Cookies.remove("admin", {
+    path: "/",
+  });
+
   router.replace("/login");
 };
 const fetchAdmissions = async () => {

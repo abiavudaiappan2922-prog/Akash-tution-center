@@ -11,25 +11,27 @@ export default function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  function handleLogin() {
+function handleLogin() {
 
-    if (
-      email === "admin@gmail.com"
-      &&
-      password === "admin123"
-    ) {
+  if (
+    email === "admin@gmail.com" &&
+    password === "admin123"
+  ) {
 
-      Cookies.set("admin", "true");
+    Cookies.set("admin", "true", {
+      expires: 1,
+      path: "/",
+    });
 
-      router.push("/admin");
+    router.push("/admin");
 
-    } else {
+  } else {
 
-      alert("Invalid email or password");
-
-    }
+    alert("Invalid email or password");
 
   }
+
+}
 
   return (
 
