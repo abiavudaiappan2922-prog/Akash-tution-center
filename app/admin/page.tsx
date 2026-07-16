@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-
+import Cookies from "js-cookie";
+import { useRouter } from "next/navigation";
 import {
   ResponsiveContainer,
   BarChart,
@@ -15,17 +16,28 @@ import {
 } from "recharts";
 
 export default function AdminPage() {
+  const router = useRouter();
+
+useEffect(() => {
+  const admin = Cookies.get("admin");
+
+  if (!admin) {
+    router.replace("/login");
+    return;
+  }
+
+  fetchAdmissions();
+}, [router]);
 
   const [students, setStudents] = useState<any[]>([]);
   
   const [search, setSearch] = useState("");
   const [selectedClass, setSelectedClass] = useState("");
 
-  useEffect(() => {
-
-  fetchAdmissions();
-
-}, []);
+ const logout = () => {
+  Cookies.remove("admin");
+  router.replace("/login");
+};
 const fetchAdmissions = async () => {
   try {
     const res = await fetch("/api/admission");
@@ -164,15 +176,7 @@ const fetchAdmissions = async () => {
 
   };
 
-  /* LOGOUT */
-
-  const logout = () => {
-
-    localStorage.removeItem("admin");
-
-    window.location.href = "/login";
-
-  };
+ 
 
   /* FILTER */
 
@@ -217,7 +221,7 @@ const fetchAdmissions = async () => {
       count: students.length,
     },
   ];
-
+  console.log("ADMIN PAGE NEW VERSION");
   return (
 
     <div className="min-h-screen bg-gray-100 p-6">
