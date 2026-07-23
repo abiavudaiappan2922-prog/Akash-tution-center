@@ -1,143 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
-
-  const [menuOpen, setMenuOpen] = useState(false);
-
   return (
+    <nav className="fixed top-0 left-0 w-full z-50 backdrop-blur-xl bg-[#0B1F33]/90 border-b border-yellow-500/20">
 
-    <nav className="w-full bg-white shadow-md fixed top-0 left-0 z-50">
+      <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
 
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+        {/* Website Name */}
 
-        {/* LOGO */}
-        <h1 className="text-2xl font-bold text-blue-700">
-          AKASH TUTION CENTER
-        </h1>
+        <Link href="/" className="flex flex-col">
 
-        {/* DESKTOP MENU */}
-        <div className="hidden md:flex gap-8 text-gray-700 font-medium items-center">
+          <h1 className="text-3xl font-extrabold text-yellow-400 tracking-wide">
+            AKASH
+          </h1>
 
-          <a
-            href="#home"
-            className="hover:text-blue-600 transition"
-          >
+          <p className="text-white text-sm tracking-[4px]">
+            TUITION CENTRE
+          </p>
+
+        </Link>
+
+        {/* Menu */}
+
+        <div className="hidden md:flex gap-10 text-white font-semibold">
+
+          <a href="#home" className="hover:text-yellow-400 duration-300">
             Home
           </a>
 
-          <a
-            href="#about"
-            className="hover:text-blue-600 transition"
-          >
+          <a href="#about" className="hover:text-yellow-400 duration-300">
             About
           </a>
 
-          <a
-            href="#classes"
-            className="hover:text-blue-600 transition"
-          >
+          <a href="#classes" className="hover:text-yellow-400 duration-300">
             Classes
           </a>
 
-          <a
-            href="#fees"
-            className="hover:text-blue-600 transition"
-          >
+          <a href="#fees" className="hover:text-yellow-400 duration-300">
             Fees
           </a>
 
-          <a
-            href="#contact"
-            className="hover:text-blue-600 transition"
-          >
+          <a href="#contact" className="hover:text-yellow-400 duration-300">
             Contact
           </a>
 
         </div>
 
-        {/* BUTTONS */}
-        <div className="hidden md:flex gap-4">
+        {/* Apply Button */}
 
-          
-         
-
-          <a
-            href="#admission"
-            className="bg-blue-600 text-white px-5 py-2 rounded-xl hover:bg-blue-700 transition font-semibold"
-          >
-            Apply Now
-          </a>
-
-        </div>
-
-        {/* MOBILE MENU BUTTON */}
-        <button
-          className="md:hidden text-3xl"
-          onClick={() => setMenuOpen(!menuOpen)}
+        <a
+          href="#admission"
+          className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-[#0B1F33] px-7 py-3 rounded-full font-bold hover:scale-105 duration-300 shadow-xl"
         >
-          ☰
-        </button>
+          Apply Now
+        </a>
 
       </div>
 
-      {/* MOBILE MENU */}
-      {menuOpen && (
-
-        <div className="md:hidden bg-white px-6 pb-6 flex flex-col gap-4 text-gray-700 font-medium shadow-lg">
-
-          <a
-            href="#home"
-            className="hover:text-blue-600 transition"
-          >
-            Home
-          </a>
-
-          <a
-            href="#about"
-            className="hover:text-blue-600 transition"
-          >
-            About
-          </a>
-
-          <a
-            href="#classes"
-            className="hover:text-blue-600 transition"
-          >
-            Classes
-          </a>
-
-          <a
-            href="#fees"
-            className="hover:text-blue-600 transition"
-          >
-            Fees
-          </a>
-
-          <a
-            href="#contact"
-            className="hover:text-blue-600 transition"
-          >
-            Contact
-          </a>
-
-          
-
-         
-          <a
-            href="#admission"
-            className="bg-blue-600 text-white px-5 py-3 rounded-xl text-center hover:bg-blue-700 transition font-semibold"
-          >
-            Apply Now
-          </a>
-
-        </div>
-
-      )}
-
     </nav>
-
   );
-
 }

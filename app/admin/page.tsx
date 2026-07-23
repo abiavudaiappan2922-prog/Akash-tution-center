@@ -68,9 +68,9 @@ const fetchAdmissions = async () => {
 
     try {
 
-      await fetch(`/api/admission/${id}`, {
-        method: "DELETE",
-      });
+      await fetch(`/api/delete-student/${id}`, {
+  method: "DELETE",
+});
 
       fetchAdmissions();
 
@@ -95,8 +95,7 @@ const fetchAdmissions = async () => {
 
     try {
 
-      await fetch(`/api/admission/${student._id}`, {
-
+      await fetch(`/api/update-student/${student._id}`, {
         method: "PUT",
 
         headers: {
@@ -206,17 +205,29 @@ const fetchAdmissions = async () => {
 
   /* GRAPH */
 
-  const classData = [
-    ...new Set(
-      students.map((s) => s.className)
-    ),
-  ].map((cls) => ({
-    class: cls,
+const classData = [];
 
-    students: students.filter(
-      (s) => s.className === cls
-    ).length,
-  }));
+const classMap: any = {};
+
+students.forEach((student) => {
+  const cls =
+    student.className ||
+    student.studentClass ||
+    "Unknown";
+
+  if (!classMap[cls]) {
+    classMap[cls] = 0;
+  }
+
+  classMap[cls]++;
+});
+
+Object.keys(classMap).forEach((cls) => {
+  classData.push({
+    class: cls,
+    students: classMap[cls],
+  });
+});
 
   const admissionData = [
     {
@@ -227,11 +238,10 @@ const fetchAdmissions = async () => {
   console.log("ADMIN PAGE NEW VERSION");
   return (
 
-    <div className="min-h-screen bg-gray-100 p-6">
-
+    <div className="min-h-screen bg-gradient-to-br from-[#061321] via-[#0B1F33] to-[#132F4C] p-6 relative overflow-hidden">
       <div className="flex justify-between items-center mb-8">
 
-        <h1 className="text-5xl font-extrabold text-blue-600">
+      <h1 className="text-5xl font-extrabold text-yellow-400">
           Admin Dashboard
         </h1>
 
@@ -239,14 +249,14 @@ const fetchAdmissions = async () => {
 
           <button
             onClick={exportExcel}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-xl text-lg font-bold shadow-lg"
+           className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-[#081827] px-6 py-3 rounded-xl text-lg font-bold shadow-lg" 
           >
             Excel
           </button>
 
           <button
             onClick={logout}
-            className="bg-black text-white px-6 py-3 rounded-xl text-lg font-bold shadow-lg"
+            className="bg-[#081827] border border-yellow-400/30 text-yellow-400 px-6 py-3 rounded-xl text-lg font-bold shadow-lg"
           >
             Logout
           </button>
@@ -259,9 +269,9 @@ const fetchAdmissions = async () => {
 
       {/* CARDS */}
 
-      <div className="grid md:grid-cols-3 gap-6 mb-10">
+      <div className="grid md:grid-cols-1 gap-6 mb-10">
 
-        <div className="bg-blue-600 text-white p-8 rounded-3xl shadow-xl">
+        <div className="bg-gradient-to-br from-[#0B1F33] to-[#061321] border border-yellow-400/30 text-white p-8 rounded-3xl shadow-xl">
 
           <h2 className="text-2xl font-bold mb-2">
             Total Students
@@ -273,108 +283,57 @@ const fetchAdmissions = async () => {
 
         </div>
 
-        <div className="bg-green-600 text-white p-8 rounded-3xl shadow-xl">
+       
 
-          <h2 className="text-2xl font-bold mb-2">
-            Classes
-          </h2>
-
-          <p className="text-4xl font-extrabold">
-            {classData.length}
-          </p>
-
-        </div>
-
-        <div className="bg-purple-600 text-white p-8 rounded-3xl shadow-xl">
-
-          <h2 className="text-2xl font-bold mb-2">
-            Today Admissions
-          </h2>
-
-          <p className="text-4xl font-extrabold">
-            {students.length}
-          </p>
-
-        </div>
+        
 
       </div>
 
       {/* GRAPH */}
 
-      <div className="grid md:grid-cols-2 gap-6 mb-10">
+      <div className="bg-white/10 backdrop-blur-xl border border-yellow-400/20 p-6 rounded-3xl shadow-2xl mb-10">
 
-        <div className="bg-white p-6 rounded-3xl shadow-lg">
+<h2 className="text-2xl font-bold mb-5 text-yellow-400">
+Class Wise Students
+</h2>
 
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Admission Overview
-          </h2>
+<ResponsiveContainer
+width="100%"
+height={500}
+>
 
-          <ResponsiveContainer
-            width="100%"
-            height={300}
-          >
+<BarChart data={classData}>
 
-            <LineChart data={admissionData}>
+<CartesianGrid strokeDasharray="3 3"/>
 
-              <CartesianGrid strokeDasharray="3 3" />
+<XAxis
+  dataKey="class"
+  interval={0}
+  angle={0}
+  textAnchor="middle"
+  height={60}
+/>
 
-              <XAxis dataKey="name" />
+<YAxis/>
 
-              <YAxis />
+<Tooltip/>
 
-              <Tooltip />
+<Bar
+dataKey="students"
+fill="#2563eb"
+radius={[8,8,0,0]}
+barSize={35}
+/>
 
-              <Line
-                type="monotone"
-                dataKey="count"
-                stroke="#2563eb"
-                strokeWidth={4}
-              />
+</BarChart>
 
-            </LineChart>
+</ResponsiveContainer>
 
-          </ResponsiveContainer>
-
-        </div>
-
-        <div className="bg-white p-6 rounded-3xl shadow-lg">
-
-          <h2 className="text-xl font-bold text-gray-800 mb-4">
-            Class Wise Students
-          </h2>
-
-          <ResponsiveContainer
-            width="100%"
-            height={300}
-          >
-
-            <BarChart data={classData}>
-
-              <CartesianGrid strokeDasharray="3 3" />
-
-              <XAxis dataKey="class" />
-
-              <YAxis />
-
-              <Tooltip />
-
-              <Bar
-                dataKey="students"
-                fill="#16a34a"
-                radius={[10, 10, 0, 0]}
-              />
-
-            </BarChart>
-
-          </ResponsiveContainer>
-
-        </div>
-
-      </div>
+</div>
 
       {/* SEARCH */}
 
-      <div className="bg-white p-6 rounded-3xl shadow-lg mb-10 flex gap-4">
+      <div className="bg-white/10 backdrop-blur-xl border border-yellow-400/20 p-6 rounded-3xl shadow-xl mb-10 flex gap-4">
 
         <input
           type="text"
@@ -415,13 +374,13 @@ const fetchAdmissions = async () => {
 
       {/* TABLE */}
 
-      <div className="overflow-x-auto bg-white rounded-3xl shadow-xl">
+      <div className="overflow-x-auto bg-white/10 backdrop-blur-xl border border-yellow-400/20 rounded-3xl shadow-2xl">
 
         <table className="w-full">
 
           <thead>
 
-            <tr className="bg-blue-600 text-white text-base">
+            <tr className="bg-gradient-to-r from-yellow-400 to-yellow-600 text-[#081827] text-base">
 
               <th className="p-5 text-left">
                 Student Name
@@ -471,41 +430,41 @@ const fetchAdmissions = async () => {
                 <tr
                   key={student._id}
                   className={`border-b ${
-                    index % 2 === 0
-                      ? "bg-white"
-                      : "bg-gray-50"
+                   index % 2 === 0
+? "bg-[#081827]"
+: "bg-[#0B1F33]"
                   } hover:bg-blue-50`}
                 >
 
-                  <td className="p-4 text-black font-semibold">
+                  <td className="p-4 text-yellow-400 font-semibold">
                     {student.studentName}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.parentName}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.parentMobile}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.alternateMobile || "-"}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.className}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.bloodGroup}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.healthIssue}
                   </td>
 
-                  <td className="p-4 text-gray-800">
+                  <td className="p-4 text-gray-200">
                     {student.address}
                   </td>
 

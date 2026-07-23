@@ -1,123 +1,191 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function About() {
-
   return (
-
     <section
-      className="py-24 bg-white"
+      id="about"
+      className="bg-[#081827] py-24 overflow-hidden"
     >
+      <div className="max-w-7xl mx-auto px-6">
 
-      <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-16 items-center">
+        {/* Heading */}
 
-        {/* LEFT SIDE IMAGE */}
-        <div>
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: .8 }}
+          viewport={{ once: true }}
+          className="text-center mb-16"
+        >
+          <p className="text-yellow-400 uppercase tracking-[5px] font-bold">
+            ABOUT US
+          </p>
 
-          <img
-            src="https://images.unsplash.com/photo-1509062522246-3755977927d7"
-            alt="About Tuition"
-            className="rounded-3xl shadow-2xl"
-          />
-
-        </div>
-
-        {/* RIGHT SIDE CONTENT */}
-        <div>
-
-          <h2 className="text-5xl font-bold text-blue-700 leading-tight">
-            About Our Tuition Center
+          <h2 className="text-5xl md:text-6xl font-extrabold text-white mt-4">
+            Why Choose
+            <span className="text-yellow-400"> Akash Tuition Centre?</span>
           </h2>
 
-          <p className="text-gray-700 text-lg mt-8 leading-9">
-
-            We provide quality coaching for both 
-            <span className="font-bold text-blue-700">
-              {" "}State Board{" "}
-            </span>
-            and
-            <span className="font-bold text-purple-700">
-              {" "}CBSE students
-            </span>
-            from 1st to 12th standard.
-
+          <p className="text-gray-400 text-lg mt-6 max-w-3xl mx-auto">
+            We provide high-quality coaching for State Board & CBSE students
+            from 1st to 12th standard with personal attention, regular tests,
+            study materials and complete exam preparation.
           </p>
+        </motion.div>
 
-          <p className="text-gray-700 text-lg mt-6 leading-9">
+        <div className="grid lg:grid-cols-2 gap-16 items-center">
 
-            Special attention is given for 
-            <span className="font-bold">
-              {" "}10th, 11th & 12th students
-            </span>
-            with subject-wise coaching, revision tests,
-            study materials, and exam preparation support.
+          {/* Image */}
 
-          </p>
+          <motion.div
+            initial={{ opacity: 0, x: -80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+            className="relative"
+          >
 
-          <p className="text-gray-700 text-lg mt-6 leading-9">
+            <img
+              src="https://images.unsplash.com/photo-1509062522246-3755977927d7?w=900"
+              alt="About"
+              className="rounded-[35px] shadow-2xl border-2 border-yellow-400/20"
+            />
 
-            Our goal is to help every student improve
-            their confidence, marks, and knowledge through
-            friendly teaching and personal guidance.
+            <div className="absolute -bottom-8 -right-8 bg-yellow-400 rounded-3xl px-8 py-6 shadow-2xl">
 
-          </p>
+              <h2 className="text-4xl font-extrabold text-[#081827]">
+                100+
+              </h2>
 
-          {/* FEATURES */}
-          <div className="grid grid-cols-2 gap-6 mt-10">
-
-            <div className="bg-blue-100 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-bold text-blue-700">
-                1st - 12th
-              </h3>
-
-              <p className="text-gray-700 mt-2">
-                All Classes Available
+              <p className="font-semibold text-[#081827]">
+                Happy Students
               </p>
 
             </div>
 
-            <div className="bg-purple-100 p-6 rounded-2xl">
+          </motion.div>
 
-              <h3 className="text-2xl font-bold text-purple-700">
-                State & CBSE
-              </h3>
+          {/* Content */}
 
-              <p className="text-gray-700 mt-2">
-                Board Coaching
-              </p>
+          <motion.div
+            initial={{ opacity: 0, x: 80 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1 }}
+            viewport={{ once: true }}
+          >
+
+            <div className="grid md:grid-cols-2 gap-6">
+
+              {[
+                
+                {
+                  icon: "👩‍🏫",
+                  title: "Expert Teacher",
+                  desc: "Friendly & Experienced Staff",
+                },
+                
+                {
+                  icon: "🎯",
+                  title: "Board Exam Coaching",
+                  desc: "10th,11th &12th Special",
+                },
+                {
+                  icon: "⭐",
+                  title: "Personal Attention",
+                  desc: "Small Batch Coaching",
+                },
+                {
+                  icon: "🏆",
+                  title: "Excellent Results",
+                  desc: "High Success Rate",
+                },
+              ].map((item, index) => (
+
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    scale: 1.05,
+                    y: -8,
+                  }}
+                  className="bg-[#10263b] rounded-3xl p-6 border border-yellow-400/20 hover:border-yellow-400 transition"
+                >
+
+                  <div className="text-5xl">
+                    {item.icon}
+                  </div>
+
+                  <h3 className="text-white text-xl font-bold mt-4">
+                    {item.title}
+                  </h3>
+
+                  <p className="text-gray-400 mt-2">
+                    {item.desc}
+                  </p>
+
+                </motion.div>
+
+              ))}
 
             </div>
 
-            <div className="bg-green-100 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-bold text-green-700">
-                Subject Wise
-              </h3>
-
-              <p className="text-gray-700 mt-2">
-                Special Coaching
-              </p>
-
-            </div>
-
-            <div className="bg-yellow-100 p-6 rounded-2xl">
-
-              <h3 className="text-2xl font-bold text-yellow-700">
-                Weekly Tests
-              </h3>
-
-              <p className="text-gray-700 mt-2">
-                Exam Preparation
-              </p>
-
-            </div>
-
-          </div>
+          </motion.div>
 
         </div>
 
+        {/* Statistics */}
+
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: .9 }}
+          viewport={{ once: true }}
+          className="grid md:grid-cols-4 gap-8 mt-20"
+        >
+
+          {[
+            {
+              number: "100+",
+              text: "Students",
+            },
+            {
+              number: "98%",
+              text: "Success Rate",
+            },
+            {
+              number: "5+",
+              text: "Years Experience",
+            },
+            {
+              number: "24/7",
+              text: "Support",
+            },
+          ].map((item, index) => (
+
+            <motion.div
+              key={index}
+              whileHover={{
+                scale: 1.08,
+              }}
+              className="bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-3xl p-8 text-center shadow-xl"
+            >
+
+              <h2 className="text-5xl font-extrabold text-[#081827]">
+                {item.number}
+              </h2>
+
+              <p className="text-[#081827] text-xl font-bold mt-4">
+                {item.text}
+              </p>
+
+            </motion.div>
+
+          ))}
+
+        </motion.div>
+
       </div>
-
     </section>
-
   );
-
 }

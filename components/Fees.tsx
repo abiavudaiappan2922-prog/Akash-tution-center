@@ -1,41 +1,23 @@
+"use client";
+
+import { motion } from "framer-motion";
+
 export default function Fees() {
 
   const fees = [
 
-    { className: "1st Standard", fees: "₹300" },
-    { className: "2nd Standard", fees: "₹300" },
-    { className: "3rd Standard", fees: "₹350" },
-    { className: "4th Standard", fees: "₹350" },
-    { className: "5th Standard", fees: "₹400" },
-    { className: "6th Standard", fees: "₹450" },
-    { className: "7th Standard", fees: "₹500" },
-    { className: "8th Standard", fees: "₹550" },
-    { className: "9th Standard", fees: "₹150 × 5 = ₹750" },
-    { className: "10th Standard", fees: "₹200 × 5 = ₹1000" },
-    { className: "11th Standard", fees: "₹200 × 6 = ₹1200" },
-    { className: "12th Standard", fees: "₹250 × 6 = ₹1500" },
-
-  ];
-
-  const specialFees = [
-
-    {
-      className: "10th",
-      stateBoard: "₹400",
-      cbse: "₹500",
-    },
-
-    {
-      className: "11th",
-      stateBoard: "₹500",
-      cbse: "₹600",
-    },
-
-    {
-      className: "12th",
-      stateBoard: "₹800",
-      cbse: "₹1000",
-    },
+    { className: "1st Standard", fees: "₹300 / Month" },
+    { className: "2nd Standard", fees: "₹300 / Month" },
+    { className: "3rd Standard", fees: "₹350 / Month" },
+    { className: "4th Standard", fees: "₹350 / Month" },
+    { className: "5th Standard", fees: "₹400 / Month" },
+    { className: "6th Standard", fees: "₹450 / Month" },
+    { className: "7th Standard", fees: "₹500 / Month" },
+    { className: "8th Standard", fees: "₹550 / Month" },
+    { className: "9th Standard", fees: "₹750 / Month" },
+    { className: "10th Standard", fees: "₹1000 / Month" },
+    { className: "11th Standard", fees: "₹1200 / Month" },
+    { className: "12th Standard", fees: "₹1500 / Month" },
 
   ];
 
@@ -43,107 +25,245 @@ export default function Fees() {
 
     <section
       id="fees"
-      className="py-24 bg-gray-100"
+      className="py-24 bg-[#081827]"
     >
 
       <div className="max-w-7xl mx-auto px-6">
 
-        {/* HEADING */}
-        <div className="text-center">
+        <motion.div
 
-          <h2 className="text-5xl font-bold text-gray-900">
+          initial={{ opacity: 0, y: 40 }}
+
+          whileInView={{ opacity: 1, y: 0 }}
+
+          transition={{ duration: .8 }}
+
+          viewport={{ once: true }}
+
+          className="text-center"
+
+        >
+
+          <p className="uppercase tracking-[5px] text-yellow-400 font-semibold">
+
             Fees Structure
-          </h2>
 
-          <p className="text-gray-600 text-xl mt-5">
-            Academic Year 2026 - 2027
           </p>
 
-        </div>
+          <h2 className="text-5xl font-extrabold text-white mt-4">
 
-        {/* MAIN FEES TABLE */}
-        <div className="mt-16 bg-white rounded-3xl shadow-2xl overflow-hidden">
+            Academic Year 2026 - 2027
 
-          <div className="bg-blue-700 text-white grid grid-cols-2 p-6 text-2xl font-bold">
+          </h2>
+
+          <p className="text-gray-400 mt-6 text-lg">
+
+            Affordable fee structure with quality coaching.
+
+          </p>
+
+        </motion.div>
+
+        <motion.div
+
+          initial={{ opacity: 0, y: 50 }}
+
+          whileInView={{ opacity: 1, y: 0 }}
+
+          transition={{ duration: .8 }}
+
+          viewport={{ once: true }}
+
+          className="mt-16 rounded-[35px] overflow-hidden border border-yellow-500/20 bg-[#10263b] shadow-2xl"
+
+        >
+
+          <div className="grid grid-cols-2 bg-gradient-to-r from-yellow-400 to-yellow-500 text-[#081827] font-bold text-xl p-6">
 
             <div>Class</div>
 
-            <div>Fees</div>
+            <div className="text-right">Monthly Fees</div>
 
           </div>
 
           {fees.map((item, index) => (
 
-            <div
+            <motion.div
+
               key={index}
-              className="grid grid-cols-2 p-6 border-b text-lg hover:bg-gray-50 transition"
+
+              whileHover={{ backgroundColor: "#17344f" }}
+
+              className="grid grid-cols-2 p-6 border-b border-white/10 text-white transition"
+
             >
 
-              <div className="font-semibold text-gray-800">
+              <div className="font-semibold">
+
                 {item.className}
+
               </div>
 
-              <div className="text-blue-700 font-bold">
+              <div className="text-right font-bold text-yellow-400">
+
                 {item.fees}
+
               </div>
 
-            </div>
+            </motion.div>
 
           ))}
 
+        </motion.div>
+        {/* ================= Special Subject Fees ================= */}
+
+<motion.div
+  initial={{ opacity: 0, y: 40 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: .8 }}
+  viewport={{ once: true }}
+  className="mt-20"
+>
+
+  <div className="text-center">
+
+    <p className="uppercase tracking-[5px] text-yellow-400 font-semibold">
+      Special Coaching
+    </p>
+
+    <h2 className="text-4xl font-extrabold text-white mt-4">
+      Special Subject Fees
+    </h2>
+
+    <p className="text-gray-400 mt-4 text-lg">
+      Individual Subject Coaching for State Board & CBSE Students
+    </p>
+
+  </div>
+
+  <div className="mt-10 rounded-[35px] overflow-hidden bg-[#10263b] border border-yellow-500/20 shadow-2xl">
+
+    {/* Header */}
+
+    <div className="grid grid-cols-3 bg-gradient-to-r from-yellow-400 to-yellow-500 text-[#081827] font-bold text-xl p-6">
+
+      <div>Class</div>
+
+      <div className="text-center">State Board</div>
+
+      <div className="text-right">CBSE</div>
+
+    </div>
+
+    {[
+      {
+        className: "10th Standard",
+        state: "₹400 / Subject",
+        cbse: "₹500 / Subject",
+      },
+      {
+        className: "11th Standard",
+        state: "₹500 / Subject",
+        cbse: "₹600 / Subject",
+      },
+      {
+        className: "12th Standard",
+        state: "₹800 / Subject",
+        cbse: "₹1000 / Subject",
+      },
+    ].map((item, index) => (
+
+      <motion.div
+        key={index}
+        whileHover={{
+          backgroundColor: "#17344f",
+        }}
+        className="grid grid-cols-3 p-6 border-b border-white/10 text-white transition duration-300"
+      >
+
+        <div className="font-semibold">
+          {item.className}
         </div>
 
-        {/* SPECIAL SUBJECT FEES */}
-        <div className="mt-20">
+        <div className="text-center text-yellow-400 font-bold">
+          {item.state}
+        </div>
 
-          <h3 className="text-4xl font-bold text-center text-purple-700">
-            Special Subject Fees
-          </h3>
+        <div className="text-right text-yellow-400 font-bold">
+          {item.cbse}
+        </div>
 
-          <p className="text-center text-gray-600 text-lg mt-4">
-            Special coaching available for State Board & CBSE students
-          </p>
+      </motion.div>
 
-          <div className="mt-10 bg-white rounded-3xl shadow-2xl overflow-hidden">
+    ))}
 
-            {/* TABLE HEADER */}
-            <div className="grid grid-cols-3 bg-purple-700 text-white p-6 text-xl font-bold">
+  </div>
 
-              <div>Class</div>
+  {/* Note */}
 
-              <div>State Board</div>
+  <div className="mt-8 rounded-3xl border border-yellow-500/20 bg-[#11253d] p-6">
 
-              <div>CBSE</div>
+    <h3 className="text-yellow-400 text-xl font-bold">
+      Important Note
+    </h3>
 
-            </div>
+    <p className="text-gray-300 mt-3 leading-8">
+      • Fees shown above are charged per subject.
+      <br />
+      • Students can choose one or more subjects based on their requirements.
+      <br />
+      • Contact the tuition centre for complete fee details and offers.
+    </p>
 
-            {/* TABLE ROWS */}
-            {specialFees.map((item, index) => (
+  </div>
 
-              <div
-                key={index}
-                className="grid grid-cols-3 p-6 border-b text-lg hover:bg-gray-50 transition"
-              >
+</motion.div>
 
-                <div className="font-semibold">
-                  {item.className}
-                </div>
+        {/* Bottom Card */}
 
-                <div className="text-green-700 font-bold">
-                  {item.stateBoard}
-                </div>
+        <motion.div
 
-                <div className="text-blue-700 font-bold">
-                  {item.cbse}
-                </div>
+          initial={{ opacity: 0, y: 50 }}
 
-              </div>
+          whileInView={{ opacity: 1, y: 0 }}
 
-            ))}
+          transition={{ duration: 1 }}
+
+          viewport={{ once: true }}
+
+          className="mt-16"
+
+        >
+
+          <div className="rounded-[35px] bg-gradient-to-r from-yellow-400 to-yellow-500 p-10 text-center shadow-2xl">
+
+            <h3 className="text-3xl font-extrabold text-[#081827]">
+
+              Admission Open for 2026 - 2027
+
+            </h3>
+
+            <p className="mt-4 text-[#081827] text-lg">
+
+              Limited Seats Available. Enroll today and secure your admission.
+
+            </p>
+
+            <a
+
+              href="#admission"
+
+              className="inline-block mt-8 bg-[#081827] text-yellow-400 px-10 py-4 rounded-full font-bold hover:scale-105 transition"
+
+            >
+
+              Apply Now
+
+            </a>
 
           </div>
 
-        </div>
+        </motion.div>
 
       </div>
 
