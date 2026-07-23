@@ -205,7 +205,10 @@ const fetchAdmissions = async () => {
 
   /* GRAPH */
 
-const classData = [];
+const classData: {
+  class: string;
+  students: number;
+}[] = [];
 
 const classMap: any = {};
 
